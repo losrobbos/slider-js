@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(green, darkgreen);
+      background-repeat: no-repeat;
+      height: 100vh;
+    }
+
+    nav {
+      padding: 2rem;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      gap: 1rem;
+      position: absolute;
+      left: 0;
+      top: 50%;
+
+      button {
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.5;
+          /* border: 1px solid white; */
+        }
+      }
+    }
+
+    article {
+      position: absolute;
+      top: 25%;
+      left: 45%;
+      align-items: center;
+      gap: 2rem;
+      perspective: 500px;
+    }
+
+    section {
+      position: absolute;
+      width: 100px;
+      height: 200px;
+      border: 1px solid #ccc;
+      transition: transform 3s;
+      transform-origin: bottom;
+      background-color: white;
+      -webkit-box-reflect: below 0px linear-gradient(transparent, #0005);
+    }
+
+    /* hidden left card  => A */
+    section:nth-of-type(1) {
+      transform: translateX(-200px) rotateY(25deg) scale(0.8);
+      z-index: -2;
+    }
+
+    /* visibile left card => 1*/
+    section:nth-of-type(2) {
+      transform: translateX(-200px) rotateY(25deg) scale(0.8);
+    }
+
+    section:nth-of-type(3) {
+      transform: translateX(-100px) rotateY(15deg) scale(0.9);
+    }
+
+    section:nth-of-type(5) {
+      transform: translateX(100px) rotateY(-15deg) scale(0.9);
+    }
+
+    /* visible right card */
+    section:nth-of-type(6) {
+      transform: translateX(200px) rotateY(-25deg) scale(0.8);
+      z-index: -1;
+    }
+
+    /* hidden right card => E */
+    section:nth-of-type(7) {
+      transform: translateX(200px) rotateY(-25deg) scale(0.8);
+      z-index: -2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <article>
+    <section>A</section>
+    <section>1</section>
+    <section>2</section>
+    <section>3</section>
+    <section>4</section>
+    <section>5</section>
+    <section>E</section>
+  </article>
+  <nav>
+    <button class="prev">&lt;</button>
+    <button class="next">&gt;</button>
+  </nav>
+
+  <script>
+
+    const container = document.querySelector("article")
+
+    // hole ALLE sections und speichere sie in einer ARRAY variablen
+    // Array Element starten bei Index 0
+    const cards = document.querySelectorAll("section")
+
+    document.querySelector(".prev").onclick = () => {
+      const cards = document.querySelectorAll("section")
+      // minecraftfuck alarm!
+      // um das LETZTE Element eines Arrays zu holen,
+      // nimm die LÄNGE der gesamten Liste und ziehe eins ab
+      container.prepend(cards[cards.length - 1])
+    }
+
+    document.querySelector(".next").onclick = () => {
+      const cards = document.querySelectorAll("section")
+      // füge ans ENDE des Containers ein Element ein
+      // füge das bestehende ERSTE Card / Section Element dort ein
+      container.append(cards[0])
+    }
+
+  </script>
+
+</body>
+
+</html>
